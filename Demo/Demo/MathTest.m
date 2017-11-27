@@ -116,6 +116,7 @@
     ZZDecimalNumberHandle *handle = [[ZZDecimalNumberHandle alloc] initWithInt:3];
     NSLog(@"%@", handle.addInt(3).addInt(5).divideFloat(2.0).decimalNumber);
     NSLog(@"%lf", handle.addInt(3).addInt(5).divideFloat(2.0).decimalNumber.doubleValue);
+    NSLog(@"%@", handle.addInt(3).addInt(5).divideFloat(2.0).decimalNumber.stringValue);
 }
 
 @end

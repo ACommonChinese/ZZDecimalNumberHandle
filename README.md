@@ -97,7 +97,16 @@ decimalNumber的结果: `po: 78.6   NSLog: 78.59999999999999 字典中的值: 78
 
 在支付宝App应用上, 测试给朋友转钱也是精确到分, 分以下不支持. 所以针对钱这种问题最好一律是以分为单位, 不存在小数问题, 整数的最小单位是1, 1在二进制表示中就是0001, 所以不存在精度丢失问题. 
 
-NSDecimalNumber使用起来有点烦琐, 我对此作了一点封装, 备记, 详情见Demo.
+NSDecimalNumber使用起来有点烦琐, 我对此作了一点封装, 使用NSDecimalNumber"三下五除二":
+
+```objective-c
+ZZDecimalNumberHandle *handle = [[ZZDecimalNumberHandle alloc] initWithInt:3];
+NSLog(@"%@", handle.addInt(3).addInt(5).divideFloat(2.0).decimalNumber);
+NSLog(@"%lf", handle.addInt(3).addInt(5).divideFloat(2.0).decimalNumber.doubleValue);
+NSLog(@"%@", handle.addInt(3).addInt(5).divideFloat(2.0).decimalNumber.stringValue);
+```
+
+备记而已, 无技术含量, 详情见Demo.
 
 
 
