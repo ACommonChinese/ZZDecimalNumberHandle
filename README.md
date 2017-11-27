@@ -66,9 +66,36 @@ NSLog(@"%@", dict);
 
 价格price打印出来竟然是78.59999999999999, 如果把这个字典作为键值传给服务器问题就麻烦了.
 
-这一点不可理解, 在Java测试中把price放入HashMap并System.out.println(map)不存在此问题, 看来和编译器也有关系了. 
+这一点不可理解, 在Java测试中把price放入HashMap并System.out.println(map)不存在此问题, 看来和编译器也有关系了.  
 
+```java
+public class TestMath {
+    public static void main(String[] args) {
+        double price = 2.0 - 1.1;
+        System.out.println(price + ""); // 0.8999999999999999
+        System.out.println((2.0-1.1)); // 0.8999999999999999
+        //使用字符串构造BigDecimal对象
+        BigDecimal a = new BigDecimal("2.0");
+        BigDecimal b = new BigDecimal("1.1");
+        BigDecimal result = a.subtract(b);
+        System.out.println(result); // 0.9
+        System.out.println(result + ""); // 0.9
+    }
+}
+```
 
+```objective-c
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        double price = 2.0 - 1.1;
+        NSLog(@"%lf", price); // 0.900000
+        NSLog(@"%lf", 2.0-1.1); // 0.900000
+        NSDictionary *dict = @{@"price" : @(price)};
+        NSLog(@"%@", dict); // {price = "0.8999999999999999";}
+    }
+    return 0;
+}
+```
 
  既然Apple建议使用NSDecimalNumber, 我们再作个测试:
 
