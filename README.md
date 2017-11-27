@@ -64,7 +64,13 @@ NSLog(@"%@", dict);
 */
 ```
 
-价格price打印出来竟然是78.59999999999999, 如果把这个字典作为键值传给服务器问题就麻烦了. 既然Apple建议使用NSDecimalNumber, 我们再作个测试:
+价格price打印出来竟然是78.59999999999999, 如果把这个字典作为键值传给服务器问题就麻烦了.
+
+这一点不可理解, 在Java测试中把price放入HashMap并System.out.println(map)不存在此问题, 看来和编译器也有关系了. 
+
+
+
+ 既然Apple建议使用NSDecimalNumber, 我们再作个测试:
 
 ```objective-c
 double price = 78.6;
