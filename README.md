@@ -137,5 +137,53 @@ NSLog(@"%@", handle.addInt(3).addInt(5).divideFloat(2.0).decimalNumber.stringVal
 
 
 
+附:
 
+NSDecimalNumber简单介绍
 
+NSDecimalNumber是NSNumber的子类，比NSNumber的功能更为强大，它们被设计为执行基础10计算，而不会损失精度并具有可预测的舍入行为。
+
+苹果官方建议在货币以及要求精度很高的场景下使用NSDecimalNumber
+
+![](./images/1.png)
+
+```objective-c
++ (instancetype)decimalNumberHandlerWithRoundingMode:(NSRoundingMode)roundingMode scale:(short)scale raiseOnExactness:(BOOL)exact raiseOnOverflow:(BOOL)overflow raiseOnUnderflow:(BOOL)underflow raiseOnDivideByZero:(BOOL)divideByZero;
+
+* 参数解析:
+* roundingMode
+ The rounding mode to use. There are four possible values: NSRoundUp, NSRoundDown, NSRoundPlain, and NSRoundBankers.
+* scale
+ The number of digits a rounded value should have after its decimal point.
+* raiseOnExactness
+ If YES, in the event of an exactness error the handler will raise an exception, otherwise it will ignore the error and return control to the calling method.
+* raiseOnOverflow
+ If YES, in the event of an overflow error the handler will raise an exception, otherwise it will ignore the error and return control to the calling method
+* raiseOnUnderflow
+ If YES, in the event of an underflow error the handler will raise an exception, otherwise it will ignore the error and return control to the calling method
+* raiseOnDivideByZero
+ If YES, in the event of a divide by zero error the handler will raise an exception, otherwise it will ignore the error and return control to the calling method
+
+当试图除以0或产生一个数表示太大或太小的时候发生异常。
+下面列出了各种异常的名字 表明NSDecimalNumber计算错误。
+extern NSString *NSDecimalNumberExactnessException; //如果出现一个精确的错误
+extern NSString *NSDecimalNumberOverflowException; // 溢出
+extern NSString *NSDecimalNumberUnderflowException; //下溢
+extern NSString *NSDecimalNumberDivideByZeroException; //除数为0
+
+typedef NS_ENUM(NSUInteger, NSRoundingMode) {
+    NSRoundPlain,   // Round up on a tie
+    NSRoundDown,    // Always down == truncate
+    NSRoundUp,      // Always up
+    NSRoundBankers  // on a tie round so last digit is even
+};
+
+NSRoundPlain,   // Round up on a tie ／／四舍五入
+NSRoundDown,    // Always down == truncate  ／／只舍不入
+NSRoundUp,      // Always up    ／／ 只入不舍
+NSRoundBankers 四舍六入, 中间值时, 取最近的,保持保留最后一位为偶数
+```
+
+From Apple:
+
+![](./images/2.png)

@@ -13,10 +13,10 @@
 
 - (void)test {
     // [self test_1];
-    // [self test_2];
+    [self test_2];
     // [self test_3];
     // [self test_4];
-    [self test_5];
+//    [self test_5];
 }
 
 - (void)test_1 {
